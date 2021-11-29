@@ -8,7 +8,7 @@ class TodoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Todo
-        fields = ['title', 'description', "schedule_at", "is_completed", 'created_at', 'updated_at']
+        fields = ['title', 'description', "schedule_at", "is_completed", 'created_at', 'updated_at', 'id']
         read_only_fields = ["created_at", "updated_at"]
 
     def create(self, validated_data):
@@ -21,5 +21,5 @@ class NotificationSerializer(serializers.ModelSerializer):
     """Notification model related serializer"""
     class Meta:
         model = Notification
-        fields = ['user', "todo", "created_at", "updated_at", "is_read"]
+        fields = ['user', "todo", "created_at", "updated_at", "is_read", 'id']
         read_only_fields = ["created_at", "updated_at", "user", "todo"]
