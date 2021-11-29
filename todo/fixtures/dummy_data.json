@@ -1,0 +1,93 @@
+[
+  {
+    "model": "todo.todo",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "title": "test",
+      "description": "test 3",
+      "created_at": "2021-11-24T15:58:14.484Z",
+      "updated_at": "2021-11-24T16:40:05.305Z",
+      "schedule_at": "2021-11-25T15:58:05Z",
+      "is_completed": false
+    }
+  },
+  {
+    "model": "todo.todo",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "title": "test 2",
+      "description": "test dec 2",
+      "created_at": "2021-11-24T16:24:38.374Z",
+      "updated_at": "2021-11-24T16:24:38.374Z",
+      "schedule_at": null,
+      "is_completed": false
+    }
+  },
+  {
+    "model": "todo.todo",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "title": "test 3",
+      "description": "test descriptions 3",
+      "created_at": "2021-11-25T14:21:55.785Z",
+      "updated_at": "2021-11-25T14:21:55.785Z",
+      "schedule_at": null,
+      "is_completed": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$5D1DbeakznyCTpIxoixssd$xBp3l3V+1RJZ3ZIINzd3N0Jiz0U1YnCskf832uGfZkA=",
+      "last_login": "2021-11-24T16:14:35Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@admin.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-11-24T15:51:08Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$SKYcZYR9Wksig7FlUbn8Bw$2P7potLfQDLOu5H1732z9aSnfS+2nd4aXgJN9XT9zQw=",
+      "last_login": "2021-11-29T03:53:52.852Z",
+      "is_superuser": true,
+      "username": "admin2",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin2@y.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-11-29T03:49:37.909Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "462860cece403b78063f3539f41eb20a4fc71d7c",
+    "fields": {
+      "user": 2,
+      "created": "2021-11-29T03:53:52.824Z"
+    }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "60e625c726646f9c38ce2047fc48412f2239accf",
+    "fields": {
+      "user": 1,
+      "created": "2021-11-24T16:14:35.623Z"
+    }
+  }
+]
