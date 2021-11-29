@@ -7,6 +7,7 @@
 * all the API doc is under the url swagger-ui with (domain name)
 * for the testing purpose, I created some django fixture that will help you to Run and test application with sufficient data
 * cron task is running on every hour, and it's create notification 
+* to add task to cron or scheduling you have to run command (make runcrons)
 
 
 run and helpful commands
