@@ -3,7 +3,6 @@ from rest_framework.mixins import UpdateModelMixin
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from todo.apis.serializers import TodoSerializer, NotificationSerializer
-from todo.models import Todo
 
 
 class TodoModelViewSet(ModelViewSet):

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import TodoListView, TodoCreateView, TodoUpdateView
-from .apis.urls import router
+
 app_name = "todo"
 
 urlpatterns = [

@@ -1,0 +1,30 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-added-large-files
+    -   id: detect-aws-credentials
+    -   id: debug-statements
+    -   id: detect-private-key
+    -   id: name-tests-test
+  - repo: https://github.com/PyCQA/pylint
+    rev: v2.13.5
+    hooks:
+      - id: pylint
+        entry: pylint
+        args: [ "--load-plugins=pylint_django",
+                "--rcfile=.pylintrc",
+                "todo" ]
+        language: system
+  - repo: local
+    hooks:
+      - id: django-test
+        name: django-test
+        entry: python manage.py test
+        always_run: true
+        pass_filenames: false
+        language: system

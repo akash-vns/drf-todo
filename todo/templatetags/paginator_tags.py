@@ -11,5 +11,5 @@ def get_parameters(context, except_field):
     getvars = context["request"].GET.copy()
     getvars.pop(except_field, None)
     if len(getvars.keys()) > 0:
-        return "%s&" % getvars.urlencode()
+        return "%s&" % getvars.urlencode() # pylint: disable=consider-using-f-string
     return ""

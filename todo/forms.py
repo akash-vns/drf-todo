@@ -1,18 +1,21 @@
-from django.contrib.admin.widgets import AdminSplitDateTime
-from django import forms
-from .models import Todo
 from datetime import datetime
 from django.contrib.auth import get_user_model
 from django.utils.timezone import make_aware
-from django.forms import TextInput, MultiWidget, DateTimeField
+from django.forms import TextInput, MultiWidget
+from django import forms
+from .models import Todo
+
+
 
 
 User = get_user_model()
 
 
 class MinimalSplitDateTimeMultiWidget(MultiWidget):
+    """custom date widget"""
 
     def __init__(self, widgets=None, attrs=None):
+        """initialization """
         if widgets is None:
             if attrs is None:
                 attrs = {}
@@ -30,11 +33,13 @@ class MinimalSplitDateTimeMultiWidget(MultiWidget):
 
     # nabbing from https://docs.djangoproject.com/en/3.1/ref/forms/widgets/#django.forms.MultiWidget.decompress
     def decompress(self, value):
+        """decompress the value """
         if value:
             return [value.date(), value.strftime('%H:%M')]
         return [None, None]
 
     def value_from_datadict(self, data, files, name):
+        """validating the data """
         date_str, time_str = super().value_from_datadict(data, files, name)
         # DateField expects a single string that it can parse into a date.
 
@@ -54,16 +59,19 @@ class TodoFilterForm(forms.Form):
     user = forms.ModelChoiceField(queryset=User.objects.all(), required=True)
 
     def filter_qs(self):
+        """filter QS with form data"""
         user = self.cleaned_data.get("user")
         return Todo.objects.filter(user=user)
 
 
 class TodoForm(forms.ModelForm):
+    """todo form"""
     class Meta:
         model = Todo
         fields = ["user", "title", "description", "schedule_at"]
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop("user", None)
+        """initialization class"""
+        kwargs.pop("user", None)
         super(TodoForm, self).__init__(*args, **kwargs)
         self.fields["schedule_at"].widget = MinimalSplitDateTimeMultiWidget()

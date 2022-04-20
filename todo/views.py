@@ -1,13 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import ListView, UpdateView, CreateView
+from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import TodoFilterForm, TodoForm
 from .models import Todo
-from django.views.generic import ListView, UpdateView, CreateView
-from django.contrib import messages
 # Create your views here.
 
 
 class TodoListView(ListView):
+    """todo list view"""
     template_name = "todo/todo_lists.html"
     queryset = Todo.objects.all()
     context_object_name = "todos"
@@ -15,11 +15,13 @@ class TodoListView(ListView):
     paginate_by = 1
 
     def get_context_data(self, *args, object_list=None, **kwargs):
+        """update the context"""
         context = super(TodoListView, self).get_context_data(*args, **kwargs)
         context["filter_form"] = self.get_filter_form()
         return context
 
     def get_filter_form(self):
+        """filter/search form"""
         data = self.request.GET if len(self.request.GET.keys()) > 0 else None
         if len(self.request.GET.keys()) == 1 and self.request.GET.get("page"):
             # handle page parameters
@@ -27,6 +29,7 @@ class TodoListView(ListView):
         return self.form_class(data=data)
 
     def get_queryset(self):
+        """modify queryset"""
         qs = super(TodoListView, self).get_queryset()
         filter_form = self.get_filter_form()
         if filter_form.is_bound and filter_form.is_valid():
@@ -35,14 +38,17 @@ class TodoListView(ListView):
 
 
 class FormErrorMessageMixin:
+    """form error mixing"""
     success_message = "Data successfully submitted"
     error_message = "Please correct error below."
 
     def form_valid(self, form):
+        """update the success message"""
         messages.success(self.request, self.success_message)
         return super().form_valid(form)
 
     def form_invalid(self, form):
+        """update the error message"""
         messages.warning(self.request, self.error_message)
         return super().form_invalid(form)
 

@@ -7,7 +7,6 @@ router.register(r"notifications", NotificationViewSet, basename='notifications')
 router.register(r"", TodoModelViewSet, basename='todo')
 
 
-app_name = "todo"
 urlpatterns = [
     path("", include(router.urls))
 ]

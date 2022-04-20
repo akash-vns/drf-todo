@@ -1,7 +1,7 @@
-from rest_framework.test import APITestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 from todo.models import Notification
 from todo.apis.serializers import NotificationSerializer
 
@@ -9,6 +9,7 @@ User = get_user_model()
 
 
 class BaseTestSetup(APITestCase):
+    """base test setup"""
     fixtures = ["todo/fixtures/dummy_data.json"]
 
     def setUp(self) -> None:
@@ -34,7 +35,7 @@ class TodoApiTestCases(BaseTestSetup):
         response = self.client.get(reverse("todo:todo-list"))
         self.assertEqual(response.status_code, 200)
 
-    def test_todo_http_get_with_200(self):
+    def test_todo_http_get_with_login_200(self):
         """method test success response of todo api"""
         self._make_use_login()
         response = self.client.get(reverse("todo:todo-list"))
@@ -101,10 +102,7 @@ class TodoApiTestCases(BaseTestSetup):
         patch_data = {
             "is_completed": True
         }
-        expected_data = {
-            "is_completed": True,
-        }
-        response = self.client.patch(reverse("todo:todo-detail", args=[self.todo.id]), data=patch_data)
+        self.client.patch(reverse("todo:todo-detail", args=[self.todo.id]), data=patch_data)
 
 
 class TestNotificationApi(BaseTestSetup):
