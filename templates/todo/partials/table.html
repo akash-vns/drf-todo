@@ -1,0 +1,41 @@
+
+{% comment %}
+OVERVIEW
+It's used to return data accordingly Family Model
+
+Arguments
+-----
+
+family_objects - its family model QS or list
+
+{% endcomment %}
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Schedule at</th>
+        <th>is completed</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for each_obj in todo_objects %}
+      <tr>
+        <td>{{each_obj.user.first_name}}</td>
+        <td>{{each_obj.user.last_name}}</td>
+        <td>{{each_obj.user.email}}</td>
+        <td>{{each_obj.title}}</td>
+        <td>{{each_obj.description}}</td>
+        <td>{{each_obj.schedule_at}}</td>
+        <td>{{each_obj.is_completed}}</td>
+        <td><a href="{% url 'todo:todo_update' each_obj.id %}"><button class="btn btn-primary btn-sm ">Edit</button></a>
+            <a href="{{each_obj.get_delete_url}}"><button class="btn btn-danger btn-sm">Delete</button></a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+</table>

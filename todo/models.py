@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from django.contrib import admin
 User = get_user_model()
 
 
@@ -53,3 +53,5 @@ class Notification(AbstractDateTimeModel):
     def create_notification(cls, user, todo_task):
         """create notification task"""
         return cls.objects.create(user=user, todo=todo_task)
+
+admin.site.register(Todo)

@@ -1,0 +1,25 @@
+{% load crispy_forms_tags i18n %}
+{% comment %}
+OVERVIEW
+It's used to make forms common for Where we create forms
+
+Arguments
+-----
+
+forms - django form class
+button_value - it's represent name of button
+action_url - action url for the form
+method - Method of submitting form , by default set to GET
+extra_css - extra_class
+{% endcomment %}
+
+
+<form action="{% if action_url %}{{action_url}}{% endif %}" class="uniForm {{extra_css}}" method="{% if method %}{{method}}{% else %}GET{% endif %}">
+    {{ form.media }}
+    {% if method|lower == 'post' %}
+    {% csrf_token %}
+    {% endif %}
+    {{ form|crispy}}
+    <button class="btn btn-info" type="submit">{{button_value}}</button>
+</form>
+

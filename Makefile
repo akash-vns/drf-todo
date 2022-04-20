@@ -20,29 +20,38 @@ restart:
 	docker-compose restart
 
 shell:
-	docker-compose exec web bash
+	docker-compose run web bash
 
 makemigrations: start
-	docker-compose exec web ./manage.py makemigrations
+	docker-compose run web ./manage.py makemigrations
 
 migrate: start
-	docker-compose exec web ./manage.py migrate
+	docker-compose run web ./manage.py migrate
 
 runcrons: start
-	docker-compose exec web ./manage.py crontab add
+	docker-compose run web ./manage.py crontab add
 
 showcrons: start
-	docker-compose exec web ./manage.py crontab show
+	docker-compose run web ./manage.py crontab show
 
 test: start
-	docker-compose exec web ./manage.py test
+	docker-compose run web ./manage.py test
 
 loaddata: start
-	docker-compose exec web ./manage.py loaddata todo/fixtures/* || true
+	docker-compose run web ./manage.py loaddata todo/fixtures/* || true
 
 logs:
 	docker-compose logs -f web
 
 
 dummy_data: start
-	docker-compose exec web ./manage.py dumpdata todo auth.user authtoken.token  > todo/fixtures/dummy_data.json
+	docker-compose run web ./manage.py dumpdata todo auth.user authtoken.token  > todo/fixtures/dummy_data.json
+
+
+
+coverage:
+	docker-compose run web coverage run --source='.' manage.py test todo
+	docker-compose run web coverage report
+
+attach_mode: start
+	docker attach drf-todo_web_1

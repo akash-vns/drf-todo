@@ -20,7 +20,7 @@ from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('todo/', include('todo.apis.urls')),
+    path('todo/', include('todo.urls')),
     path("", TemplateView.as_view(template_name='index.html')),
     path('auth/', include('rest_auth.urls')),  # login/logout
 
